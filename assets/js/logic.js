@@ -111,10 +111,10 @@ submit.addEventListener('click', function (event) {
     event.preventDefault();
     let initial = initialsEl.value.trim();
     if (initial !== "") {
-        let userScores = JSON.parse(window.localStorage.getItem("userScores")) || [];
+        let userScores = JSON.parse(window.localStorage.getItem('userScores')) || [];
         let newScore = { initial: initial, score: totalScore };
         userScores.push(newScore);
-        window.localStorage.setItem("userScores", JSON.stringify(userScores));
+        window.localStorage.setItem('userScores', JSON.stringify(userScores));
         window.location.href = './highscores.html';
     }
 });
