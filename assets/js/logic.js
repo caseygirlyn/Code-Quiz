@@ -35,6 +35,7 @@ function startTimer() {
     }
 }
 
+// Stop the countdown if time is up/ if all questions are aswered and display end screen with total score and input text to submit initials
 function timeIsUp() {
     clearInterval(myTimer);
     questionEl.classList.add('hide');
@@ -43,6 +44,7 @@ function timeIsUp() {
     finalScore.innerHTML = totalScore;
 }
 
+// Check if answer is correct/wrong, increment total score if correct and load next q&a
 function validateAnswer(userAnswer) {
     feedback.classList.remove('hide');
     correctAns = questions[questionCounter - 1].correctAnswer;
@@ -58,6 +60,7 @@ function validateAnswer(userAnswer) {
     }, 1000);
 }
 
+// Display each set of Q&As from questions array
 function loadQA() {
     if (choices.hasChildNodes()) {
         choices.innerHTML = '';
@@ -103,7 +106,7 @@ function loadQA() {
 
 }
 
-// Save 
+// Save user initials and score to local storage
 submit.addEventListener('click', function (event) {
     event.preventDefault();
     let initial = initialsEl.value.trim();
