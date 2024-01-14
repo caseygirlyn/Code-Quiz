@@ -6,11 +6,17 @@ let clearBtn = document.querySelector('#clear');
 function displayScores() {
     let userScores = JSON.parse(window.localStorage.getItem('userScores')) || [];
 
-    userScores.forEach(function(score) {
-      let liEl = document.createElement('li');
-      liEl.textContent = score.initial + ' - ' + score.score;
-      olEl.appendChild(liEl);
+    // W3Schools array sort() method
+    userScores.sort(function (a, b) {
+        return b.score - a.score;
     });
+
+    userScores.forEach(function (score) {
+        let liEl = document.createElement('li');
+        liEl.textContent = score.initial + ' - ' + score.score;
+        olEl.appendChild(liEl);
+    });
+
 }
 
 displayScores();

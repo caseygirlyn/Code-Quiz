@@ -54,6 +54,7 @@ function validateAnswer(userAnswer) {
         totalScore++;
     } else {
         feedback.innerHTML = "Wrong!";
+        countdown -= 10;
     }
     setTimeout(function () {
         loadQA();
