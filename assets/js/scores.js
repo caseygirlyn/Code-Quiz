@@ -1,5 +1,6 @@
 let olEl = document.getElementById('highscores');
 let scoresBtn = document.querySelector('#highscores');
+let clearBtn = document.querySelector('#clear');
 
 // Display user initials and score from local storage
 function displayScores() {
@@ -13,3 +14,9 @@ function displayScores() {
 }
 
 displayScores();
+
+// Clear scores from local storage when user click clear button and reload the page
+clearBtn.addEventListener('click', function (event) {
+    window.localStorage.removeItem('userScores');
+    window.location.reload();
+});
