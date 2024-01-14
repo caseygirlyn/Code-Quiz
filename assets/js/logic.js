@@ -7,6 +7,8 @@ let feedback = document.querySelector('#feedback');
 let btnchoice = document.querySelector('button');
 let finalScore = document.querySelector('#final-score');
 let endScreen = document.querySelector('#end-screen');
+let initialsEl = document.querySelector('#initials');
+let submit = document.querySelector('#submit');
 
 let countdown = 75;
 let questionCounter = 0;
@@ -20,19 +22,17 @@ btnStartScreen.addEventListener('click', function (event) {
     questionEl.classList.remove('hide');;
     btnStartScreen.classList.add('hide');
     loadQA();
-    myTimer = startTimer();
+    myTimer = setInterval(startTimer, 1000);;
 });
 
 function startTimer() {
-    setInterval(function () {
-        if (countdown > 0) {
-            countdown--;
-            // Display countdown timer on the screen
-            timerEl.textContent = countdown;
-        } else {
-            timeIsUp()
-        }
-    }, 1000);
+    if (countdown > 0) {
+        countdown--;
+        // Display countdown timer on the screen
+        timerEl.textContent = countdown;
+    } else {
+        timeIsUp()
+    }
 }
 
 function timeIsUp() {
@@ -102,3 +102,16 @@ function loadQA() {
     }
 
 }
+
+// Save 
+submit.addEventListener('click', function (event) {
+    event.preventDefault();
+    let initial = initialsEl.value.trim();
+    if (initial !== "") {
+        let userScores = JSON.parse(window.localStorage.getItem("userScores")) || [];
+        let newScore = { initial: initial, score: totalScore };
+        userScores.push(newScore);
+        window.localStorage.setItem("userScores", JSON.stringify(userScores));
+        window.location.href = './highscores.html';
+    }
+});
