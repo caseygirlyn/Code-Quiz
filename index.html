@@ -33,10 +33,12 @@
       <div id="end-screen" class="hide">
         <h2>All done!</h2>
         <p>Your final score is <span id="final-score"></span>.</p>
-        <p>
-          Enter initials: <input type="text" id="initials" max="3" />
+        <p class="submitInitials">
+          Enter initials: <input type="text" id="initials" max="3" required/>
+          <span id="errorMessage" class="hide">⚠<small> Please enter your initials</small></span>
           <button id="submit">Submit</button>
         </p>
+        
       </div>
 
       <div id="feedback" class="feedback hide"></div>

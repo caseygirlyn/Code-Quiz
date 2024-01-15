@@ -8,6 +8,7 @@ let finalScore = document.querySelector('#final-score');
 let endScreen = document.querySelector('#end-screen');
 let initialsEl = document.querySelector('#initials');
 let submit = document.querySelector('#submit');
+let errorMessage = document.querySelector('#errorMessage');
 
 let countdown = 75;
 let questionCounter = 0;
@@ -97,5 +98,8 @@ submit.addEventListener('click', function (event) {
         userScores.push(newScore);
         window.localStorage.setItem('userScores', JSON.stringify(userScores));
         window.location.href = './highscores.html';
+    }else{
+        initialsEl.classList.add('invalid');
+        errorMessage.classList.remove('hide');
     }
 });
