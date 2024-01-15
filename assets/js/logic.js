@@ -48,7 +48,6 @@ function validateAnswer(userAnswer) {
     feedback.classList.remove('hide');
     correctAns = questions[questionCounter].correctAnswer;
 
-    console.log(userAnswer, correctAns);
     if (userAnswer === correctAns) {
         feedback.innerHTML = 'Correct!';
         totalScore++;
@@ -86,7 +85,6 @@ function loadQA() {
     } else if (questionCounter === questions.length) {
         timeIsUp()
     }
-
 }
 
 // Save user initials and score to local storage
