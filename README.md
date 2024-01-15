@@ -7,8 +7,8 @@ This application is designed to challenge users with a series of coding-related 
 - Countdown timer starts when user clicks Start Quiz.
 - Multiple-choice questions focusing on JavaScript programming.
 - Audio feedback for correct and incorrect answers.
-- Option for users to submit their intials when time is up or after completing the quiz
-- Scoring system to track and display the high scores stored in local storage
+- Option for users to submit their intials when time is up or after completing the quiz.
+- Scoring system to track and display the high scores stored in local storage.
 - Clean, polished and responsive UI.
 
 ## Technologies Used
