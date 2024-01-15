@@ -9,6 +9,8 @@ let endScreen = document.querySelector('#end-screen');
 let initialsEl = document.querySelector('#initials');
 let submit = document.querySelector('#submit');
 let errorMessage = document.querySelector('#errorMessage');
+let correctWav = new Audio('./assets/sfx/correct.wav');
+let incorrectWav = new Audio('./assets/sfx/incorrect.wav');
 
 let countdown = 75;
 let questionCounter = 0;
@@ -51,9 +53,11 @@ function validateAnswer(userAnswer) {
 
     if (userAnswer === correctAns) {
         feedback.innerHTML = 'Correct!';
+        correctWav.play();
         totalScore++;
     } else {
         feedback.innerHTML = 'Wrong!';
+        incorrectWav.play();
         countdown -= 10;
     }
     questionCounter++
