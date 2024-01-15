@@ -4,7 +4,6 @@ let questionEl = document.querySelector('#questions');
 let questionTitle = document.querySelector('#question-title');
 let choices = document.querySelector('#choices');
 let feedback = document.querySelector('#feedback');
-let btnchoice = document.querySelector('button');
 let finalScore = document.querySelector('#final-score');
 let endScreen = document.querySelector('#end-screen');
 let initialsEl = document.querySelector('#initials');
@@ -12,17 +11,17 @@ let submit = document.querySelector('#submit');
 
 let countdown = 75;
 let questionCounter = 0;
-let correctAns = '';
 let totalScore = 0;
-var myTimer;
+let correctAns;
+let myTimer;
 
 btnStartScreen.addEventListener('click', function (event) {
-    event.preventDefault()
+    event.preventDefault();
+    myTimer = setInterval(startTimer, 1000);
     timerEl.textContent = countdown;
-    questionEl.classList.remove('hide');;
+    questionEl.classList.remove('hide');
     btnStartScreen.classList.add('hide');
     loadQA();
-    myTimer = setInterval(startTimer, 1000);;
 });
 
 function startTimer() {
@@ -39,23 +38,25 @@ function startTimer() {
 function timeIsUp() {
     clearInterval(myTimer);
     questionEl.classList.add('hide');
-    endScreen.classList.remove('hide');
     feedback.classList.add('hide');
+    endScreen.classList.remove('hide');
     finalScore.innerHTML = totalScore;
 }
 
 // Check if answer is correct/wrong, increment total score if correct and load next q&a
 function validateAnswer(userAnswer) {
     feedback.classList.remove('hide');
-    correctAns = questions[questionCounter - 1].correctAnswer;
+    correctAns = questions[questionCounter].correctAnswer;
 
+    console.log(userAnswer, correctAns);
     if (userAnswer === correctAns) {
-        feedback.innerHTML = "Correct!";
+        feedback.innerHTML = 'Correct!';
         totalScore++;
     } else {
-        feedback.innerHTML = "Wrong!";
+        feedback.innerHTML = 'Wrong!';
         countdown -= 10;
     }
+    questionCounter++
     setTimeout(function () {
         loadQA();
     }, 1000);
@@ -69,37 +70,18 @@ function loadQA() {
     if (questionCounter < questions.length) {
         feedback.innerHTML = '';
         feedback.classList.add('hide');
-        let question = questions[questionCounter].question;
-        let choice1 = questions[questionCounter].choice1;
-        let choice2 = questions[questionCounter].choice2;
-        let choice3 = questions[questionCounter].choice3;
-        let choice4 = questions[questionCounter].choice4;
+
+        let currentQuestion = questions[questionCounter];
+        let question = currentQuestion.question;
 
         questionTitle.textContent = question;
 
-        questionCounter++;
-
-        let buttonEl1 = document.createElement('button');
-        buttonEl1.setAttribute('onclick', 'validateAnswer(1)');
-
-        let buttonEl2 = document.createElement('button');
-        buttonEl2.setAttribute('onclick', 'validateAnswer(2)');
-
-        let buttonEl3 = document.createElement('button');
-        buttonEl3.setAttribute('onclick', 'validateAnswer(3)');
-
-        let buttonEl4 = document.createElement('button');
-        buttonEl4.setAttribute('onclick', 'validateAnswer(4)');
-
-        buttonEl1.textContent = '1. ' + choice1;
-        buttonEl2.textContent = '2. ' + choice2;
-        buttonEl3.textContent = '3. ' + choice3;
-        buttonEl4.textContent = '4. ' + choice4;
-
-        choices.appendChild(buttonEl1);
-        choices.appendChild(buttonEl2);
-        choices.appendChild(buttonEl3);
-        choices.appendChild(buttonEl4);
+        currentQuestion.choices.forEach(function (choice, i) {
+            let buttonEl = document.createElement('button');
+            buttonEl.textContent = i + 1 + '. ' + choice;
+            buttonEl.setAttribute('onclick', `validateAnswer(${i})`);
+            choices.appendChild(buttonEl);
+        });
 
     } else if (questionCounter === questions.length) {
         timeIsUp()
@@ -111,7 +93,7 @@ function loadQA() {
 submit.addEventListener('click', function (event) {
     event.preventDefault();
     let initial = initialsEl.value.trim();
-    if (initial !== "") {
+    if (initial !== '') {
         let userScores = JSON.parse(window.localStorage.getItem('userScores')) || [];
         let newScore = { initial: initial, score: totalScore };
         userScores.push(newScore);
