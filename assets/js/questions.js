@@ -11,7 +11,7 @@ const questions = [
         question: "Which of the following keywords is used to define a variable in Javascript?",
         choice1: "const",
         choice2: "let",
-        choice3: "Both A and B",
+        choice3: "Both const and let",
         choice4: "None of the above",
         correctAnswer: 3
     },
@@ -45,7 +45,7 @@ const questions = [
         choice1: "/**/",
         choice2: "//",
         choice3: "#",
-        choice4: "Both A and B",
+        choice4: "Both /**/ and //",
         correctAnswer: 4
     }
     ,
